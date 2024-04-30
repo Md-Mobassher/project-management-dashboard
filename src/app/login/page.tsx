@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Form, Input, Button, message } from "antd";
 import Image from "next/image";
 import login from "@/assets/images/login.jpg";
+import FormItemLabel from "antd/es/form/FormItemLabel";
 
 const LoginPage = () => {
   const [form] = Form.useForm();
@@ -32,14 +33,16 @@ const LoginPage = () => {
           <Image src={login} alt="login image"></Image>
         </div>
         <div className=" w-[400px] shadow-lg rounded-lg px-10 py-16">
-          <Form form={form} onFinish={handleLogin}>
+          <Form form={form} layout="vertical" onFinish={handleLogin}>
             <Form.Item
               name="email"
+              label="Email"
               rules={[{ required: true, message: "Please enter your email" }]}
             >
-              <Input placeholder="Email" />
+              <Input type="email" placeholder="Email" />
             </Form.Item>
             <Form.Item
+              label="Password"
               name="password"
               rules={[
                 { required: true, message: "Please enter your password" },
