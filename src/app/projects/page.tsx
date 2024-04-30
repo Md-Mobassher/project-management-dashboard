@@ -2,6 +2,8 @@
 import { useProjects } from "@/zustand/projectStore";
 import { TProject } from "../../type/index";
 import Title from "@/components/ui/Title";
+import Loading from "@/components/shared/Loading";
+import ProjectCard from "@/components/ui/ProjectCard";
 
 const ProjectsPage = () => {
   const { projects, isLoading, isError } = useProjects();
@@ -12,21 +14,19 @@ const ProjectsPage = () => {
     // }
   };
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4 py-6 min-h-screen">
       <Title firstTitle="Projects" lastTitle="Overview" />
-      {isError && <div>Error fetching projects</div>}
+      {isError && (
+        <div className="text-red-500 text-center my-10">
+          Error fetching projects
+        </div>
+      )}
       {isLoading ? (
-        <div>Loading...</div>
+        <Loading />
       ) : (
-        <div>
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 my-10">
           {projects.map((project: TProject) => (
-            <div key={project.id} style={{ marginBottom: 16 }}>
-              <div>Name: {project.name}</div>
-              <div>Description: {project.description}</div>
-              <button onClick={() => handleDeleteProject(project.id)}>
-                Delete
-              </button>
-            </div>
+            <ProjectCard key={project.id} {...project} />
           ))}
         </div>
       )}
