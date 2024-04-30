@@ -1,0 +1,55 @@
+[
+  {
+    "id": "project-1",
+    "name": "Website Redesign",
+    "description": "Redesign the company's website to improve user experience and modernize the design.",
+    "deadline": "2024-06-30",
+    "status": "In Progress",
+    "image": "../../src/assets/images/Project-Management-Team.webp",
+    "tasks": [
+      {
+        "id": "task-1",
+        "title": "Gather Requirements",
+        "description": "Meet with stakeholders to gather requirements and understand project scope.",
+        "deadline": "2024-04-30",
+        "status": "Completed",
+        "assignedTo": [
+          {
+            "id": "member-1",
+            "name": "John Doe",
+            "role": "Project Manager"
+          },
+          {
+            "id": "member-2",
+            "name": "Jane Smith",
+            "role": "UX Designer"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "project-2",
+    "name": "Mobile App Development",
+    "description": "Develop a mobile application for iOS and Android platforms.",
+    "deadline": "2024-08-15",
+    "status": "Pending",
+    "image": "../../src/assets/images/Project-Management-Team.webp",
+    "tasks": [
+      {
+        "id": "task-3",
+        "title": "UI Design",
+        "description": "Design the user interface for the mobile app.",
+        "deadline": "2024-06-30",
+        "status": "In Progress",
+        "assignedTo": [
+          {
+            "id": "member-3",
+            "name": "Alice Johnson",
+            "role": "UI Designer"
+          }
+        ]
+      }
+    ]
+  }
+]

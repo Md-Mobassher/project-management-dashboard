@@ -5,6 +5,7 @@ import Image from "next/image";
 import login from "@/assets/images/login.jpg";
 import FormItemLabel from "antd/es/form/FormItemLabel";
 import { useRouter } from "next/navigation";
+import Title from "@/components/ui/Title";
 
 const LoginPage = () => {
   const [form] = Form.useForm();
@@ -29,8 +30,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white max-w-7xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold text-center text-black">Login Here</h2>
+    <div className="min-h-screen bg-white max-w-7xl mx-auto px-4 py-6">
+      <Title firstTitle="Login" lastTitle="Here" />
       <div className="flex flex-wrap justify-around items-center">
         <div className=" w-[500px] ">
           <Image src={login} alt="login image"></Image>

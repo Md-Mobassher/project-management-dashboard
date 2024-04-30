@@ -20,19 +20,12 @@ const items = [
   label: `nav ${index + 1}`,
 }));
 
-const sidebarItems = ["Add-Task"];
-
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Layout className="min-h-screen">
-      <Sider breakpoint="lg" collapsedWidth="0" className="bg-white">
+    <Layout className="min-h-screen" style={{ backgroundColor: "FFF" }}>
+      <Sider breakpoint="lg" collapsedWidth="0" theme="light">
         <div className="demo-logo-vertical" />
-        <Menu
-          theme="light"
-          mode="inline"
-          defaultSelectedKeys={["4"]}
-          items={items}
-        />
+        <Menu mode="inline" defaultSelectedKeys={["4"]} items={items} />
       </Sider>
       <Layout>
         <Content style={{ margin: "24px 16px 0" }}>
