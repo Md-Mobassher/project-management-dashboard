@@ -3,7 +3,7 @@ import notfound from "@/assets/images/not-found.jpg";
 
 const NotFoundPage = () => {
   return (
-    <div className="w-[40%] mx-auto">
+    <div className="w-[40%] mx-auto min-h-screen">
       <Image
         src={notfound}
         width={500}

@@ -4,10 +4,12 @@ import { Form, Input, Button, message } from "antd";
 import Image from "next/image";
 import login from "@/assets/images/login.jpg";
 import FormItemLabel from "antd/es/form/FormItemLabel";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleLogin = async (data: { email: string; password: string }) => {
     setLoading(true);
@@ -19,6 +21,7 @@ const LoginPage = () => {
         data.password === "mobassher123"
       ) {
         message.success("Login successful!");
+        router.push("/");
       } else {
         message.error("Invalid username or password");
       }
