@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Management Dashboard
+
+A project management application built with Next.js, Zustand, React Query, Ant Design, and Tailwind CSS.
+
+## Deployment
+
+- **Live Link :** [Project Management Dashboard]()
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Features](#features)
+- [Technical Stack](#technical-stack)
+- [Getting Started](#getting-started)
+- [Folder Structure](#folder-structure)
+- [License](#license)
+
+## Introduction
+
+This project is a dashboard for managing tasks and projects. It includes features such as authentication, project overview, project details, task management, task filters, search functionality, and an interactive dashboard.
+
+## Features
+
+- **Authentication Page**: Allows users to log in with form validation and mock responses for successful and unsuccessful logins.
+- **Projects Overview Page**: Displays a list of projects with options to view, edit, or delete.
+- **Project Details Page**: Shows detailed information about selected projects, including tasks, team members, and recent activities.
+- **Task Management**: Allows adding, editing, and marking tasks as completed, with drag-and-drop functionality to change task statuses.
+- **Task Filters and Search Functionality**: Enables filtering tasks by status, due date, or assignee, and provides a search bar for quick task searches.
+- **Interactive Dashboard**: Utilizes Ant Design components for modals, dropdowns, and tooltips, with responsive design using Tailwind CSS.
+
+## Technical Stack
+
+- **Framework**: Next.js for routing and server-side rendering.
+- **State Management**: Zustand for managing the global state.
+- **Data Fetching**: React Query for handling asynchronous data fetching, state management, and cache management.
+- **UI Components**: Ant Design for pre-built UI components.
+- **Styling**: Tailwind CSS for responsive design and custom styling needs.
 
 ## Getting Started
 
-First, run the development server:
+To get started with the project, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. Clone the repository:
+
+```
+git clone https://github.com/Md-Mobassher/project-management-dashboard.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Navigate to the project directory:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+cd project-management-dashboard
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Install dependencies:
 
-## Learn More
+```
+npm install
+# or
+yarn
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Run the development server:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+npm run dev # or yarn dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+5. Open http://localhost:3000 in your browser to view the application.
 
-## Deploy on Vercel
+## Folder Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project follows a standard folder structure:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **components**: Contains reusable React components used throughout the application.
+- **pages**: Contains Next.js pages for routing and rendering.
+- **styles**: Contains global styles and utility classes for Tailwind CSS.
+- **mock**: Contains mock data for development and testing purposes.
+
+## License
+
+This project is licensed under the MIT License.
