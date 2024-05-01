@@ -3,6 +3,9 @@ import { State, TMember, TProject, TTask } from "@/type";
 import { useProjectsQuery } from "@/api/projectMockApi";
 
 const useProjectStore = create<State>((set) => ({
+  login: false,
+  setLogin: (login: boolean) => set({ login }),
+
   projects: [],
   setProjects: (projects: TProject[]) => set({ projects }),
 

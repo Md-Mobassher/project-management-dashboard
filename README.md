@@ -4,7 +4,7 @@ A project management application built with Next.js, Zustand, React Query, Ant D
 
 ## Deployment
 
-- **Live Link :** [Project Management Dashboard]()
+- **Live Link :** [Project Management Dashboard](https://project-management-dashboard-nu.vercel.app)
 
 ## Table of Contents
 

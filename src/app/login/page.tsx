@@ -7,6 +7,7 @@ import FormItemLabel from "antd/es/form/FormItemLabel";
 import { useRouter } from "next/navigation";
 import Title from "@/components/ui/Title";
 import { toast } from "react-toastify";
+import useProjectStore from "@/zustand/projectStore";
 
 const LoginPage = () => {
   const [form] = Form.useForm();
@@ -23,6 +24,7 @@ const LoginPage = () => {
         data.password === "mobassher123"
       ) {
         toast.success("Login successful!");
+        useProjectStore.setState({ login: true });
         router.push("/");
       } else {
         toast.error("Invalid username or password");

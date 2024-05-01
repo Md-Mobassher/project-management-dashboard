@@ -11,7 +11,7 @@ const HomePage = () => {
   const { projects, isLoading, isError } = useProjects();
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 min-h-screen">
-      <Title firstTitle="Welcome To" lastTitle="Project Management Dashboard" />
+      <Title firstTitle="Welcome To" lastTitle="Project Management" />
       {isError && (
         <div className="text-red-500 text-center my-10">
           Error fetching projects

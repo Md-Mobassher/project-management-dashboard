@@ -24,6 +24,7 @@ export type TProject = {
 };
 
 export interface State {
+  login: boolean;
   projects: TProject[];
   setProjects: (projects: TProject[]) => void;
   deleteProject: (projectId: string) => void;
