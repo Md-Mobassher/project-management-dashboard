@@ -22,3 +22,7 @@ export type TProject = {
   image: string;
   tasks: TTask[];
 };
+
+export interface State {
+  projects: TProject[];
+}

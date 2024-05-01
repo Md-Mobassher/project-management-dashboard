@@ -1,8 +1,8 @@
 import { create } from "zustand";
-import { TProject } from "@/type";
+import { State, TProject } from "@/type";
 import { useProjectsQuery } from "@/api/projectMockApi";
 
-const useProjectStore = create((set) => ({
+const useProjectStore = create<State>((set) => ({
   projects: [],
   setProjects: (projects: TProject[]) => set({ projects }),
   addProject: (project: TProject) =>
@@ -21,10 +21,16 @@ export const useProjects = () => {
   if (isLoading || isError) {
     return { projects: [], isLoading, isError };
   }
-
   useProjectStore.setState({ projects: data });
 
   return { projects: data, isLoading, isError };
+};
+
+export const useProjectById = (projectId: string) => {
+  const projects = useProjectStore((state) => state.projects);
+
+  const project = projects.find((project) => project.id === projectId);
+  return project;
 };
 
 export default useProjectStore;
