@@ -1,5 +1,4 @@
 import { useQuery } from "react-query";
-import { TProject } from "@/type";
 
 // fetch all projects
 export const fetchAllProjects = async () => {
@@ -11,22 +10,6 @@ export const fetchAllProjects = async () => {
   return projectsData;
 };
 
-// fetch a project by ID
-export const fetchProjectById = async (
-  projectId: string
-): Promise<TProject | undefined> => {
-  const projects = await fetchAllProjects();
-
-  const project = projects.find(
-    (project: TProject) => project.id === projectId
-  );
-  return project;
-};
-
 export const useProjectsQuery = () => {
   return useQuery("projects", fetchAllProjects);
-};
-
-export const useProjectByIdQuery = (projectId: string) => {
-  return useQuery(["project", projectId], () => fetchProjectById(projectId));
 };

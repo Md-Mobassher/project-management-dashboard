@@ -1,5 +1,5 @@
 "use client";
-import { fetchProjectById, useProjectByIdQuery } from "@/api/projectMockApi";
+
 import Loading from "@/components/shared/Loading";
 import ProjectDetails from "@/components/ui/ProjectDetails";
 import Title from "@/components/ui/Title";
