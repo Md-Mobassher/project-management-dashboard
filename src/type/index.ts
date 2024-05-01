@@ -10,7 +10,7 @@ export type TTask = {
   description: string;
   deadline: string;
   status: string;
-  assignedTo: TMember[];
+  assignedTo: TMember[] | [];
 };
 
 export type TProject = {
@@ -25,4 +25,22 @@ export type TProject = {
 
 export interface State {
   projects: TProject[];
+  setProjects: (projects: TProject[]) => void;
+  deleteProject: (projectId: string) => void;
+  addTask: (projectId: string, task: TTask) => void;
+}
+
+export interface TaskFormProps {
+  projectId?: string;
+  initialData?: TProject;
+  visible: boolean;
+  onCreate: (values: TaskFormData) => void;
+  onCancel: () => void;
+}
+
+export interface TaskFormData {
+  title: string;
+  description: string;
+  deadline: string;
+  assignedTo: string;
 }

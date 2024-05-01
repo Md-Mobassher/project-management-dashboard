@@ -1,4 +1,5 @@
 import { TProject } from "@/type";
+import useProjectStore from "@/zustand/projectStore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -11,6 +12,11 @@ const ProjectCard = ({
   deadline,
 }: TProject) => {
   const router = useRouter();
+
+  const handleDeleteProject = (projectId: string) => {
+    const result = useProjectStore.getState().deleteProject(projectId);
+    console.log(result);
+  };
 
   const handleDetails = (id: string) => {
     router.push(`/projects/${id}`);
@@ -67,7 +73,10 @@ const ProjectCard = ({
           <button className="px-5 py-2 border border-yellow-600 rounded-md hover:bg-yellow-500 hover:text-white">
             Edit
           </button>
-          <button className="px-5 py-2 border border-red-600 rounded-md hover:bg-red-500 hover:text-white">
+          <button
+            className="px-5 py-2 border border-red-600 rounded-md hover:bg-red-500 hover:text-white"
+            onClick={() => handleDeleteProject(id)}
+          >
             Delete
           </button>
         </div>

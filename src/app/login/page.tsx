@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
-import { Form, Input, Button, message } from "antd";
+import { Form, Input, Button } from "antd";
 import Image from "next/image";
 import login from "@/assets/images/login.jpg";
 import FormItemLabel from "antd/es/form/FormItemLabel";
 import { useRouter } from "next/navigation";
 import Title from "@/components/ui/Title";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [form] = Form.useForm();
@@ -21,10 +22,10 @@ const LoginPage = () => {
         data.email === "mobassherpautex@gmail.com" &&
         data.password === "mobassher123"
       ) {
-        message.success("Login successful!");
+        toast.success("Login successful!");
         router.push("/");
       } else {
-        message.error("Invalid username or password");
+        toast.error("Invalid username or password");
       }
     }, 1000);
   };

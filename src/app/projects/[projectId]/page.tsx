@@ -1,11 +1,8 @@
 "use client";
 
-import Loading from "@/components/shared/Loading";
 import ProjectDetails from "@/components/ui/ProjectDetails";
 import Title from "@/components/ui/Title";
-import { TProject } from "@/type";
 import { useProjectById } from "@/zustand/projectStore";
-import { useEffect, useState } from "react";
 
 type TParams = {
   params: {
@@ -13,7 +10,6 @@ type TParams = {
   };
 };
 const ProjectDetailPage = ({ params }: TParams) => {
-  // const [projectData, setProjectData] = useState<TProject | null>(null);
   const projectId = params.projectId;
   const project = useProjectById(projectId);
 
