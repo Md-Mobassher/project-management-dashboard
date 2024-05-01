@@ -1,8 +1,9 @@
 import { TProject } from "@/type";
+import useProjectStore from "@/zustand/projectStore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const ProjectCard = ({
+const ProjectOverviewCard = ({
   id,
   name,
   description,
@@ -11,6 +12,11 @@ const ProjectCard = ({
   deadline,
 }: TProject) => {
   const router = useRouter();
+
+  const handleDeleteProject = (projectId: string) => {
+    const result = useProjectStore.getState().deleteProject(projectId);
+    console.log(result);
+  };
 
   const handleDetails = (id: string) => {
     router.push(`/projects/${id}`);
@@ -27,7 +33,7 @@ const ProjectCard = ({
           className="rounded-t-lg"
         />
       </div>
-      <div className="p-5 flex flex-col justify-stretch items-stretch ">
+      <div className="p-5 flex flex-col justify-between items-stretch">
         <div className="flex flex-wrap justify-between">
           <h3 className="font-semibold text-xl text-blue-500 mb-1">
             <span className="text-blue-500">Name:</span> {name}
@@ -57,12 +63,16 @@ const ProjectCard = ({
             <span className=" font-semibold">Deadline:</span> {deadline}
           </p>
         </div>
-        <div className="mt-6">
-          <button
-            className="px-5 py-2 border border-blue-600 rounded-md hover:bg-blue-500 hover:text-white"
-            onClick={() => handleDetails(id)}
-          >
-            Details
+        <div className="mt-5 flex flex-wrap gap-3 ">
+          <button className="px-5 py-2 border border-yellow-600 rounded-md hover:bg-yellow-500 hover:text-white">
+            Edit
+          </button>
+
+          <button className="px-5 py-2 border border-red-600 rounded-md hover:bg-red-500 hover:text-white">
+            Delete
+          </button>
+          <button className="px-5 py-2 border border-green-500 rounded-md hover:bg-green-500 hover:text-white">
+            Add Task
           </button>
         </div>
       </div>
@@ -70,4 +80,4 @@ const ProjectCard = ({
   );
 };
 
-export default ProjectCard;
+export default ProjectOverviewCard;

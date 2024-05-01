@@ -44,3 +44,9 @@ export interface TaskFormData {
   deadline: string;
   assignedTo: string;
 }
+
+export type TParams = {
+  params: {
+    projectId: string;
+  };
+};

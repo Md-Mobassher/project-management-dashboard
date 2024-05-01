@@ -11,8 +11,6 @@ const EditProjectModal: React.FC<TaskFormProps> = ({
 }) => {
   const [form] = Form.useForm<TaskFormData>();
 
-  const initialData = useProjectById(projectId);
-
   const onFinish = (values: TaskFormData) => {
     onCreate(values);
     form.resetFields();
@@ -34,7 +32,6 @@ const EditProjectModal: React.FC<TaskFormProps> = ({
         <Form.Item
           name="name"
           label="Project name"
-          valuePropName={initialData?.name}
           rules={[{ required: true, message: "Please enter the project name" }]}
         >
           <Input />
@@ -42,7 +39,6 @@ const EditProjectModal: React.FC<TaskFormProps> = ({
         <Form.Item
           name="description"
           label="Description"
-          initialValue={initialData?.description}
           rules={[{ required: true, message: "Please enter the description" }]}
         >
           <Input.TextArea />
@@ -50,7 +46,6 @@ const EditProjectModal: React.FC<TaskFormProps> = ({
         <Form.Item
           name="deadline"
           label="Deadline"
-          initialValue={initialData?.deadline}
           rules={[{ required: true, message: "Please select the deadline" }]}
         >
           <DatePicker />
@@ -58,7 +53,6 @@ const EditProjectModal: React.FC<TaskFormProps> = ({
         <Form.Item
           name="status"
           label="Status"
-          initialValue={initialData?.status}
           rules={[{ required: true, message: "Please select the status" }]}
         >
           <Select />
@@ -66,7 +60,6 @@ const EditProjectModal: React.FC<TaskFormProps> = ({
         <Form.Item
           name="image"
           label="Image Url"
-          initialValue={initialData?.image}
           rules={[{ required: true, message: "Please enter the image url" }]}
         >
           <Input />

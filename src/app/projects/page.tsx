@@ -4,6 +4,7 @@ import { TProject } from "../../type/index";
 import Title from "@/components/ui/Title";
 import Loading from "@/components/shared/Loading";
 import ProjectCard from "@/components/ui/ProjectCard";
+import ProjectOverviewCard from "@/components/ui/ProjectOverviewCard";
 
 const ProjectsPage = () => {
   const { projects, isLoading, isError } = useProjects();
@@ -21,7 +22,7 @@ const ProjectsPage = () => {
       ) : (
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 my-10">
           {projects.map((project: TProject) => (
-            <ProjectCard key={project.id} {...project} />
+            <ProjectOverviewCard key={project.id} {...project} />
           ))}
         </div>
       )}
