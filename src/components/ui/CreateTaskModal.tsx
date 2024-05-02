@@ -1,19 +1,41 @@
 import React from "react";
 import { Modal, Form, Input, DatePicker, Button } from "antd";
-import { TaskFormData, TaskFormProps } from "@/type";
+import { TaskFormData, TaskFormProps, TTask } from "@/type";
+import useProjectStore from "@/zustand/projectStore";
+import { v4 as uuidv4 } from "uuid";
 
 const CreateTaskModal: React.FC<TaskFormProps> = ({
+  projectId,
   visible,
   onCreate,
   onCancel,
 }) => {
   const [form] = Form.useForm<TaskFormData>();
+  const addTaskFunc = useProjectStore((state) => state.addTask);
 
   const onFinish = (values: TaskFormData) => {
+    const deadlineString = new Date(values.deadline);
+
+    const addTask = {
+      id: uuidv4(),
+      title: values.title,
+      description: values.description,
+      status: "Pending",
+      deadline: deadlineString.toISOString(),
+      assignedTo: [
+        {
+          id: uuidv4(),
+          name: values.name,
+          role: values.role,
+        },
+      ],
+    };
+    console.log(addTask);
+
+    addTaskFunc(projectId as string, addTask as TTask);
     onCreate(values);
     form.resetFields();
   };
-
   return (
     <Modal
       visible={visible}
@@ -49,8 +71,20 @@ const CreateTaskModal: React.FC<TaskFormProps> = ({
           <DatePicker />
         </Form.Item>
         <Form.Item
-          name="assignedTo"
-          label="Assigned To"
+          name="name"
+          label="Assigned To (Name)"
+          rules={[
+            {
+              required: true,
+              message: "Please enter the assigned team member",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="role"
+          label="Assigned To (Role)"
           rules={[
             {
               required: true,

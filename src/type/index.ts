@@ -58,6 +58,8 @@ export interface TaskFormData {
   description: string;
   deadline: string;
   status: string;
+  name?: string;
+  role?: string;
 }
 
 export interface TaskFormProps {

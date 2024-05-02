@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Form, Input, DatePicker, Button, Select } from "antd";
-import { TaskFormData, TaskFormProps } from "@/type";
+import { TaskFormData, TaskFormProps, TTask } from "@/type";
 import { Option } from "antd/es/mentions";
 import moment from "moment";
 import useProjectStore from "@/zustand/projectStore";
@@ -14,7 +14,7 @@ const EditTaskModal: React.FC<TaskFormProps> = ({
   onCancel,
 }) => {
   const [form] = Form.useForm<TaskFormData>();
-  const editTaskFunc = useProjectStore((state) => state.editTask);
+  const editTaskFunc = useProjectStore((state) => state.addTask);
 
   const onFinish = (values: TaskFormData) => {
     const deadlineString = new Date(values.deadline);
@@ -27,7 +27,7 @@ const EditTaskModal: React.FC<TaskFormProps> = ({
     };
     console.log(editedTask);
 
-    editTaskFunc(projectId as string, taskId as string, editedTask);
+    editTaskFunc(projectId as string, editedTask as TTask);
     onCreate(values);
     form.resetFields();
   };

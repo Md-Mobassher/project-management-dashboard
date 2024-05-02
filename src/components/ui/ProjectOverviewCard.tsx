@@ -63,7 +63,7 @@ const ProjectOverviewCard = ({
           className="rounded-t-lg"
         />
       </div>
-      <div className="p-5 flex flex-col justify-start items-center gap-5">
+      <div className="p-5 flex flex-col justify-start items-start gap-5">
         <div className="flex flex-wrap justify-between">
           <h3 className="font-semibold text-xl text-blue-500 mb-1">
             <span className="text-blue-500">Name:</span> {name}
@@ -101,7 +101,7 @@ const ProjectOverviewCard = ({
             >
               Details
             </button>
-            <button
+            {/* <button
               className="px-5 py-2 border border-yellow-600 rounded-md hover:bg-orange-500 hover:text-white"
               onClick={() => setIsEditProjectModalVisible(true)}
             >
@@ -113,7 +113,7 @@ const ProjectOverviewCard = ({
               visible={isEditProjectModalVisible}
               onCreate={handleEditProject}
               onCancel={handleCancelEdit}
-            />
+            /> */}
             <button
               className="px-4 py-2 border border-red-600 rounded-md hover:bg-red-500 hover:text-white"
               onClick={() => handleDeleteProject(id)}

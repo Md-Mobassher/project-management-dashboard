@@ -45,16 +45,8 @@ const ProjectDetailPage = ({ params }: TParams) => {
 
   /* create task */
   const handleCreateTask = (values: TaskFormData) => {
-    const newTask = {
-      id: uuidv4(),
-      title: values.title,
-      description: values.description,
-      deadline: values.deadline,
-      status: "Pending",
-      assignedTo: [],
-    };
-    console.log(newTask);
-    // addTask(params.projectId, newTask);
+    console.log(values);
+    toast.success("Task Added Successfully");
     setIsCreateTaskModalVisible(false);
   };
 
@@ -88,7 +80,7 @@ const ProjectDetailPage = ({ params }: TParams) => {
       <div className=" my-10">
         {project && (
           <div className="border rounded-lg lg:p-8 p-5">
-            <div className="lg:flex md:flex justify-between items-stretch gap-10">
+            <div className="lg:flex md:flex justify-between items-stretch gap-8">
               <div className="lg:w-[50%] md:w-[50%] w-full mx-auto border rounded-lg flex">
                 <Image
                   src={image}
@@ -156,6 +148,7 @@ const ProjectDetailPage = ({ params }: TParams) => {
                     Add Task
                   </button>
                   <CreateTaskModal
+                    projectId={id}
                     visible={isCreateTaskModalVisible}
                     onCreate={handleCreateTask}
                     onCancel={handleCancel}
@@ -163,12 +156,12 @@ const ProjectDetailPage = ({ params }: TParams) => {
                 </div>
               </div>
             </div>
-            <div className="border rounded-lg p-5 mt-10">
+            <div className=" mt-8 grid lg:grid-cols-2 grid-cols-1 mx-auto gap-8">
               {tasks &&
                 tasks.map((task) => (
-                  <div key={task.id}>
-                    <div className="flex flex-wrap justify-between items-start">
-                      <div>
+                  <div key={task.id} className="border rounded-lg p-4">
+                    <div className="flex  justify-between items-start gap-2 mb-5">
+                      <div className="w-[80%]">
                         <h3 className="font-semibold text-xl text-blue-500 mb-1">
                           <span className="text-blue-500">Task Title:</span>{" "}
                           {task.title}
@@ -208,7 +201,7 @@ const ProjectDetailPage = ({ params }: TParams) => {
                       </div>
                       <div>
                         <button
-                          className="px-5 py-2 border border-yellow-600 rounded-md hover:bg-orange-500 hover:text-white"
+                          className="px-3 py-2 border border-yellow-600 rounded-md hover:bg-orange-500 hover:text-white"
                           onClick={() => setIsEditTaskModalVisible(true)}
                         >
                           Edit Task
@@ -233,7 +226,7 @@ const ProjectDetailPage = ({ params }: TParams) => {
                         <span className="text-blue-500 ">Assigned To</span>
                       </h3>
 
-                      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 ">
+                      <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-5 ">
                         {task.assignedTo?.map((member) => (
                           <div
                             key={member.id}

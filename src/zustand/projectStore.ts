@@ -48,14 +48,16 @@ export const useProjectStore = create<State>((set) => ({
       ),
     })),
 
-  addTask: (projectId: string, task: TTask) =>
+  addTask: (projectId: string, task: TTask) => {
+    console.log(projectId, task);
     set((state) => ({
       projects: state.projects.map((project) =>
         project.id === projectId
           ? { ...project, tasks: [...project.tasks, task] }
           : project
       ),
-    })),
+    }));
+  },
 
   editTask: (projectId: string, taskId: string, newData: Partial<TTask>) => {
     set((state) => {
