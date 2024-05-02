@@ -7,10 +7,13 @@ import Title from "@/components/ui/Title";
 import { TaskFormData, TParams, TProject } from "@/type";
 import useProjectStore, { useProjects } from "@/zustand/projectStore";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 
 const ProjectDetailPage = ({ params }: TParams) => {
+  const router = useRouter();
   // const addTask = useProjectStore((state) => state.addTask);
   /* modal */
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
@@ -23,7 +26,7 @@ const ProjectDetailPage = ({ params }: TParams) => {
     return <Loading />;
   }
 
-  const { name, description, deadline, status, image, tasks } =
+  const { id, name, description, deadline, status, image, tasks } =
     project as TProject;
 
   /* edit project */
@@ -53,6 +56,13 @@ const ProjectDetailPage = ({ params }: TParams) => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+  };
+
+  /* delete */
+  const handleDeleteProject = (id: string) => {
+    useProjectStore.getState().deleteProject(id);
+    toast.success("Deleted successfully!");
+    router.push("/projects");
   };
 
   return (
@@ -117,7 +127,10 @@ const ProjectDetailPage = ({ params }: TParams) => {
                     onCreate={handleEditProject}
                     onCancel={handleCancelEdit}
                   />
-                  <button className="px-5 py-2 border border-red-600 rounded-md hover:bg-red-500 hover:text-white">
+                  <button
+                    className="px-4 py-2 border border-red-600 rounded-md hover:bg-red-500 hover:text-white"
+                    onClick={() => handleDeleteProject(id)}
+                  >
                     Delete
                   </button>
                   <button

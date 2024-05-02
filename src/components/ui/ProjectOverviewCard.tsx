@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import EditProjectModal from "./EditProjectModal";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const ProjectOverviewCard = ({
   id,
@@ -39,6 +40,7 @@ const ProjectOverviewCard = ({
   /* delete project */
   const handleDeleteProject = (id: string) => {
     useProjectStore.getState().deleteProject(id);
+    toast.success("Deleted successfully!");
   };
 
   /* details */

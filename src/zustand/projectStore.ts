@@ -40,6 +40,7 @@ export const useProjectStore = create<State>((set) => ({
       };
     });
   },
+
   deleteProject: (projectId: string) =>
     set((state) => ({
       projects: state.projects.filter(
