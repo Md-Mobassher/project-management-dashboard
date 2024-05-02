@@ -36,6 +36,7 @@ const ProjectDetailPage = ({ params }: TParams) => {
   /* edit project */
   const handleEditProject = (values: ProjectFormData) => {
     console.log(values);
+    toast.success("Project Edited Successfull");
     setIsEditProjectModalVisible(false);
   };
 
@@ -79,8 +80,8 @@ const ProjectDetailPage = ({ params }: TParams) => {
 
       <div className=" my-10">
         {project && (
-          <div className="border rounded-lg lg:p-8 p-5">
-            <div className="lg:flex md:flex justify-between items-stretch gap-8">
+          <div className="">
+            <div className="lg:flex md:flex justify-between items-stretch gap-8 border rounded-lg p-5 shadow-md">
               <div className="lg:w-[50%] md:w-[50%] w-full mx-auto border rounded-lg flex">
                 <Image
                   src={image}
@@ -156,11 +157,11 @@ const ProjectDetailPage = ({ params }: TParams) => {
                 </div>
               </div>
             </div>
-            <div className=" mt-8 grid lg:grid-cols-2 grid-cols-1 mx-auto gap-8">
+            <div className=" mt-8 grid lg:grid-cols-2 grid-cols-1 mx-auto gap-8 border rounded-lg p-5">
               {tasks &&
                 tasks.map((task) => (
                   <div key={task.id} className="border rounded-lg p-4">
-                    <div className="flex  justify-between items-start gap-2 mb-5">
+                    <div className="flex  justify-between items-start gap-2 mb-4">
                       <div className="w-[80%]">
                         <h3 className="font-semibold text-xl text-blue-500 mb-1">
                           <span className="text-blue-500">Task Title:</span>{" "}
@@ -219,7 +220,7 @@ const ProjectDetailPage = ({ params }: TParams) => {
 
                     <hr />
                     <div
-                      className=" py-5
+                      className=" py-4
               "
                     >
                       <h3 className="font-semibold text-xl text-blue-500 text-center mb-5">
