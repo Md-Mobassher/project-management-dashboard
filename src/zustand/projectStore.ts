@@ -57,6 +57,27 @@ export const useProjectStore = create<State>((set) => ({
       ),
     })),
 
+  editTask: (projectId: string, taskId: string, newData: Partial<TTask>) => {
+    set((state) => {
+      // Map over the projects and find the project with the matching projectId
+      const updatedProjects = state.projects.map((project) => {
+        if (project.id === projectId) {
+          // Map over the tasks of the project and update the task with the matching taskId
+          const updatedTasks = project.tasks.map((task) =>
+            task.id === taskId ? { ...task, ...newData } : task
+          );
+          // Return the updated project with the updated tasks
+          return { ...project, tasks: updatedTasks };
+        }
+        // Return unchanged project if projectId does not match
+        return project;
+      });
+
+      // Return the updated state with the updated projects
+      return { ...state, projects: updatedProjects };
+    });
+  },
+
   assignTeamMember: (projectId: string, taskId: string, teamMember: TMember) =>
     set((state) => ({
       projects: state.projects.map((project) =>

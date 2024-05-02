@@ -32,24 +32,41 @@ export interface State {
   editProject: (projectId: string, newData: Partial<TProject>) => void;
   deleteProject: (id: string) => void;
   addTask: (id: string, task: TTask) => void;
+  editTask: (id: string, taskId: string, newData: Partial<TTask>) => void;
 }
 
-export interface TaskFormProps {
+export interface ProjectFormProps {
   projectId?: string;
   initialData?: TProject;
   visible: boolean;
-  onCreate: (values: TaskFormData) => void;
+  onCreate: (values: ProjectFormData) => void;
   onCancel: () => void;
 }
 
-export interface TaskFormData {
+export interface ProjectFormData {
   id: string;
   name: string;
-  title?: string;
   description: string;
   deadline: string;
   status: string;
   image: string;
+}
+
+export interface TaskFormData {
+  id: string;
+  title: string;
+  description: string;
+  deadline: string;
+  status: string;
+}
+
+export interface TaskFormProps {
+  taskId?: string;
+  projectId?: string;
+  initialTaskData?: TaskFormData;
+  visible: boolean;
+  onCreate: (values: TaskFormData) => void;
+  onCancel: () => void;
 }
 
 export type TParams = {

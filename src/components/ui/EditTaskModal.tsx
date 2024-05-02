@@ -1,39 +1,33 @@
 import React from "react";
 import { Modal, Form, Input, DatePicker, Button, Select } from "antd";
-import { ProjectFormData, ProjectFormProps } from "@/type";
+import { TaskFormData, TaskFormProps } from "@/type";
 import { Option } from "antd/es/mentions";
 import moment from "moment";
 import useProjectStore from "@/zustand/projectStore";
 
-const EditProjectModal: React.FC<ProjectFormProps> = ({
-  initialData,
+const EditTaskModal: React.FC<TaskFormProps> = ({
+  initialTaskData,
   projectId,
+  taskId,
   visible,
   onCreate,
   onCancel,
 }) => {
-  const [form] = Form.useForm<ProjectFormData>();
-  const editProjectFunc = useProjectStore((state) => state.editProject);
-  const initialValues = {
-    name: initialData?.name,
-    description: initialData?.description,
-    deadline: moment(initialData?.deadline),
-    status: initialData?.status,
-    image: initialData?.image,
-  };
+  const [form] = Form.useForm<TaskFormData>();
+  const editTaskFunc = useProjectStore((state) => state.editTask);
 
-  const onFinish = (values: ProjectFormData) => {
+  const onFinish = (values: TaskFormData) => {
     const deadlineString = new Date(values.deadline);
-    const editedProject = {
-      id: projectId,
-      name: values.name,
+    const editedTask = {
+      id: taskId,
+      title: values.title,
       description: values.description,
       deadline: deadlineString.toISOString(),
       status: values.status,
-      image: values.image,
     };
+    console.log(editedTask);
 
-    editProjectFunc(projectId as string, editedProject);
+    editTaskFunc(projectId as string, taskId as string, editedTask);
     onCreate(values);
     form.resetFields();
   };
@@ -47,41 +41,44 @@ const EditProjectModal: React.FC<ProjectFormProps> = ({
       footer={null}
     >
       <h2 className=" text-2xl  font-semibold text-center text-black mb-5">
-        Edit <span className="text-blue-500"> Project</span>
+        Edit <span className="text-blue-500"> Task</span>
       </h2>
 
       <Form
         form={form}
         layout="vertical"
         onFinish={onFinish}
-        initialValues={initialValues}
+        initialValues={initialTaskData}
       >
         <Form.Item
-          initialValue={initialData?.name}
-          name="name"
-          label="Project name"
-          rules={[{ required: true, message: "Please enter the project name" }]}
+          name="title"
+          label="Task Title"
+          rules={[{ required: true, message: "Please enter the Task Title" }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           name="description"
-          label="Description"
-          rules={[{ required: true, message: "Please enter the description" }]}
+          label="Task Description"
+          rules={[
+            { required: true, message: "Please enter the task description" },
+          ]}
         >
           <Input.TextArea />
         </Form.Item>
         <Form.Item
           name="deadline"
-          label="Deadline"
-          rules={[{ required: true, message: "Please select the deadline" }]}
+          label="Task Deadline"
+          rules={[
+            { required: true, message: "Please select the Task deadline" },
+          ]}
         >
           <DatePicker />
         </Form.Item>
         <Form.Item
           name="status"
-          label="Select"
-          rules={[{ required: true, message: "Please select the status" }]}
+          label="Select Task Status"
+          rules={[{ required: true, message: "Please select the Task status" }]}
         >
           <Select>
             <Option value="Pending">Pending</Option>
@@ -89,17 +86,10 @@ const EditProjectModal: React.FC<ProjectFormProps> = ({
             <Option value="Completed">Completed</Option>
           </Select>
         </Form.Item>
-        <Form.Item
-          name="image"
-          label="Image Url"
-          rules={[{ required: true, message: "Please enter the image url" }]}
-        >
-          <Input />
-        </Form.Item>
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Edit Project
+            Edit Task
           </Button>
         </Form.Item>
       </Form>
@@ -107,4 +97,4 @@ const EditProjectModal: React.FC<ProjectFormProps> = ({
   );
 };
 
-export default EditProjectModal;
+export default EditTaskModal;

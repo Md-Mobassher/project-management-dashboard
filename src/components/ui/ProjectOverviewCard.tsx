@@ -1,10 +1,11 @@
-import { TaskFormData, TProject } from "@/type";
+import { ProjectFormData, TaskFormData, TProject } from "@/type";
 import useProjectStore from "@/zustand/projectStore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import EditProjectModal from "./EditProjectModal";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Loading from "../shared/Loading";
 
 const ProjectOverviewCard = ({
   id,
@@ -14,19 +15,21 @@ const ProjectOverviewCard = ({
   status,
   deadline,
 }: TProject) => {
+  const [isEditProjectModalVisible, setIsEditProjectModalVisible] =
+    useState(false);
+
   const setSingleProject = useProjectStore((state) => state.setSingleProject);
   const router = useRouter();
 
   /* edit project */
-  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const handleEditProject = (values: TaskFormData) => {
+  const handleEditProject = (values: ProjectFormData) => {
     console.log(values);
-    setIsEditModalVisible(false);
-  };
-  const handleCancelEdit = () => {
-    setIsEditModalVisible(false);
+    setIsEditProjectModalVisible(false);
   };
 
+  const handleCancelEdit = () => {
+    setIsEditProjectModalVisible(false);
+  };
   const initialValues = {
     id: id,
     name: name,
@@ -99,15 +102,15 @@ const ProjectOverviewCard = ({
               Details
             </button>
             <button
-              className="px-5 py-2 border border-yellow-600 rounded-md hover:bg-yellow-500 hover:text-white"
-              onClick={() => setIsEditModalVisible(true)}
+              className="px-5 py-2 border border-yellow-600 rounded-md hover:bg-orange-500 hover:text-white"
+              onClick={() => setIsEditProjectModalVisible(true)}
             >
               Edit
             </button>
             <EditProjectModal
               initialData={initialValues}
               // projectId={params.projectId}
-              visible={isEditModalVisible}
+              visible={isEditProjectModalVisible}
               onCreate={handleEditProject}
               onCancel={handleCancelEdit}
             />
