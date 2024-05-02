@@ -11,8 +11,8 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const ProjectDetailPage = ({ params }: TParams) => {
-  const setSingleProject = useProjectStore((state) => state.setSingleProject);
-  const addTask = useProjectStore((state) => state.addTask);
+  // const addTask = useProjectStore((state) => state.addTask);
+  /* modal */
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -47,7 +47,7 @@ const ProjectDetailPage = ({ params }: TParams) => {
       assignedTo: [],
     };
     console.log(newTask);
-    addTask(params.projectId, newTask);
+    // addTask(params.projectId, newTask);
     setIsModalVisible(false);
   };
 

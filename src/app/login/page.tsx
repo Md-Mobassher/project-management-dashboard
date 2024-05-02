@@ -14,6 +14,11 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const initialValues = {
+    email: "mobassherpautex@gmail.com",
+    password: "mobassher123",
+  };
+
   const handleLogin = async (data: { email: string; password: string }) => {
     setLoading(true);
 
@@ -40,7 +45,12 @@ const LoginPage = () => {
           <Image src={login} alt="login image"></Image>
         </div>
         <div className=" w-[400px] shadow-lg rounded-lg px-10 py-16">
-          <Form form={form} layout="vertical" onFinish={handleLogin}>
+          <Form
+            form={form}
+            layout="vertical"
+            onFinish={handleLogin}
+            initialValues={initialValues}
+          >
             <Form.Item
               name="email"
               label="Email"

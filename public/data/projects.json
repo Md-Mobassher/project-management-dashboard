@@ -82,7 +82,7 @@
     "description": "Redesign the company's website to improve user experience and modernize the design.",
     "deadline": "2024-06-30",
     "status": "In-Progress",
-    "image": "https://i.ibb.co/XsgZN5B/NGIT-Research-Foundation-1-1.png",
+    "image": "https://i.ibb.co/Ykxg8Kx/mobileapp.png",
     "tasks": [
       {
         "id": "task-1",
@@ -111,7 +111,7 @@
     "description": "Develop a mobile application for iOS and Android platforms.",
     "deadline": "2024-08-10",
     "status": "Completed",
-    "image": "https://i.ibb.co/BN4p25t/Bike-Managemt.png",
+    "image": "https://i.ibb.co/b3MfMJN/media.png",
     "tasks": [
       {
         "id": "task-3",
@@ -135,7 +135,7 @@
     "description": "Develop a mobile application for iOS and Android platforms.",
     "deadline": "2024-08-15",
     "status": "Pending",
-    "image": "https://i.ibb.co/F5FXCNd/Grocery-Management.png",
+    "image": "https://i.ibb.co/gtmJscw/masfbd.png",
     "tasks": [
       {
         "id": "task-3",

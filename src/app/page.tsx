@@ -3,12 +3,17 @@ import Loading from "@/components/shared/Loading";
 import ProjectCard from "@/components/ui/ProjectCard";
 import Title from "@/components/ui/Title";
 import { TProject } from "@/type";
-import { useProjects } from "@/zustand/projectStore";
+import useProjectStore, { useProjects } from "@/zustand/projectStore";
 import Link from "next/link";
 import React from "react";
 
 const HomePage = () => {
   const { projects, isLoading, isError } = useProjects();
+  // let projects = useProjectStore((state) => state.projects);
+
+  // if (!projects) {
+  //   return <Loading />;
+  // }
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 min-h-screen">
       <Title firstTitle="Welcome To" lastTitle="Project Management" />

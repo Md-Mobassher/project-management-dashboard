@@ -21,31 +21,23 @@ export const useProjectStore = create<State>((set) => ({
   addProject: (project: TProject) =>
     set((state) => ({ projects: [...state.projects, project] })),
 
-  // editProject: (projectId: string, newData: Partial<TProject>) => {
-  //   set((state) => ({
-  //     projects: state.projects.map((project) =>
-  //       project.id === projectId ? { ...project, ...newData } : project
-  //     ),
-  //   }));
-  // },
   editProject: (projectId: string, newData: Partial<TProject>) => {
     set((state) => {
-      // Update the projects array
+      // Map over the projects and update the project with the matching projectId
       const updatedProjects = state.projects.map((project) =>
         project.id === projectId ? { ...project, ...newData } : project
       );
 
-      // Call setSingleProject to update the singleProject state
+      // Find the updated project with the matching projectId
       const updatedProject = updatedProjects.find(
         (project) => project.id === projectId
       );
-      const newState = {
+
+      return {
         ...state,
         projects: updatedProjects,
-        singleProject: updatedProject, // Update singleProject with the edited project
+        singleProject: updatedProject,
       };
-
-      return newState;
     });
   },
   deleteProject: (projectId: string) =>
@@ -88,12 +80,6 @@ export const useProjects = () => {
   }
   useProjectStore.setState({ projects: data });
   return { projects: data, isLoading, isError };
-};
-
-export const useProjectById = (projectId: string) => {
-  const projects = useProjectStore((state) => state.projects);
-  const project = projects.find((project) => project.id === projectId);
-  return project;
 };
 
 export default useProjectStore;

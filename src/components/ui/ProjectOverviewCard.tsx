@@ -1,8 +1,9 @@
-import { TProject } from "@/type";
+import { TaskFormData, TProject } from "@/type";
 import useProjectStore from "@/zustand/projectStore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import EditProjectModal from "./EditProjectModal";
+import { useState } from "react";
 
 const ProjectOverviewCard = ({
   id,
@@ -15,9 +16,32 @@ const ProjectOverviewCard = ({
   const setSingleProject = useProjectStore((state) => state.setSingleProject);
   const router = useRouter();
 
+  /* edit project */
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const handleEditProject = (values: TaskFormData) => {
+    console.log(values);
+    setIsEditModalVisible(false);
+  };
+  const handleCancelEdit = () => {
+    setIsEditModalVisible(false);
+  };
+
+  const initialValues = {
+    id: id,
+    name: name,
+    description: description,
+    deadline: deadline,
+    status: status,
+    image: image,
+    tasks: [],
+  };
+
+  /* delete project */
   const handleDeleteProject = (id: string) => {
     useProjectStore.getState().deleteProject(id);
   };
+
+  /* details */
   const handleDetails = (id: string) => {
     setSingleProject(id);
     router.push(`/projects/${id}`);
@@ -74,17 +98,17 @@ const ProjectOverviewCard = ({
             </button>
             <button
               className="px-5 py-2 border border-yellow-600 rounded-md hover:bg-yellow-500 hover:text-white"
-              // onClick={() => setIsEditModalVisible(true)}
+              onClick={() => setIsEditModalVisible(true)}
             >
               Edit
             </button>
-            {/* <EditProjectModal
-              initialData={project}
-              projectId={params.projectId}
+            <EditProjectModal
+              initialData={initialValues}
+              // projectId={params.projectId}
               visible={isEditModalVisible}
               onCreate={handleEditProject}
               onCancel={handleCancelEdit}
-            /> */}
+            />
             <button
               className="px-4 py-2 border border-red-600 rounded-md hover:bg-red-500 hover:text-white"
               onClick={() => handleDeleteProject(id)}

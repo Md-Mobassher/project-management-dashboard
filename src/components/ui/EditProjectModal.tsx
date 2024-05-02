@@ -38,21 +38,6 @@ const EditProjectModal: React.FC<TaskFormProps> = ({
     form.resetFields();
   };
 
-  // const onFinish = (values: TaskFormData) => {
-  //   const deadlineString = new Date(values.deadline);
-  //   const editedProject = {
-  //     id: projectId,
-  //     name: values.name,
-  //     description: values.description,
-  //     deadline: deadlineString.toISOString(),
-  //     status: values.status,
-  //     image: values.image,
-  //   };
-  //   onCreate(values);
-  //   editProjectFunc(projectId as string, editedProject);
-  //   form.resetFields();
-  // };
-
   return (
     <Modal
       visible={visible}
