@@ -6,6 +6,11 @@ A project management application built with Next.js, Zustand, React Query, Ant D
 
 - **Live Link :** [Project Management Dashboard](https://project-management-dashboard-nu.vercel.app)
 
+## Login Info
+
+- **Email** : mobassherpautex@gmail.com
+- **Password** : mobassher123
+
 ## Table of Contents
 
 - [Introduction](#introduction)

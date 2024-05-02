@@ -5,48 +5,30 @@ import CreateTaskModal from "@/components/ui/CreateTaskModal";
 import EditProjectModal from "@/components/ui/EditProjectModal";
 import Title from "@/components/ui/Title";
 import { TaskFormData, TParams, TProject } from "@/type";
-import useProjectStore, {
-  useProjectById,
-  useProjects,
-} from "@/zustand/projectStore";
+import useProjectStore, { useProjects } from "@/zustand/projectStore";
 import Image from "next/image";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const ProjectDetailPage = ({ params }: TParams) => {
+  const setSingleProject = useProjectStore((state) => state.setSingleProject);
   const addTask = useProjectStore((state) => state.addTask);
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const { projects, isLoading, isError } = useProjects();
+  /* get project by id */
+  let project = useProjectStore((state) => state.singleProject);
 
-  if (isLoading) {
+  if (!project) {
     return <Loading />;
   }
-  if (isError) {
-    return (
-      <div className="text-red-500 text-center my-10">
-        Error fetching projects
-      </div>
-    );
-  }
-  const project = projects.find(
-    (project: TProject) => project.id === params.projectId
-  );
+
   const { name, description, deadline, status, image, tasks } =
     project as TProject;
 
   /* edit project */
   const handleEditProject = (values: TaskFormData) => {
-    const newTask = {
-      id: uuidv4(),
-      title: values.title,
-      description: values.description,
-      deadline: values.deadline,
-      status: "In-Progress",
-      assignedTo: [],
-    };
-    console.log(newTask);
+    console.log(values);
     setIsEditModalVisible(false);
   };
 
@@ -129,6 +111,7 @@ const ProjectDetailPage = ({ params }: TParams) => {
                     Edit
                   </button>
                   <EditProjectModal
+                    initialData={project}
                     projectId={params.projectId}
                     visible={isEditModalVisible}
                     onCreate={handleEditProject}

@@ -2,23 +2,52 @@ import { create } from "zustand";
 import { State, TMember, TProject, TTask } from "@/type";
 import { useProjectsQuery } from "@/api/projectMockApi";
 
-const useProjectStore = create<State>((set) => ({
+export const useProjectStore = create<State>((set) => ({
   login: false,
   setLogin: (login: boolean) => set({ login }),
 
   projects: [],
   setProjects: (projects: TProject[]) => set({ projects }),
 
+  singleProject: null,
+  setSingleProject: (projectId: string | null) =>
+    set((state) => ({
+      ...state,
+      singleProject: projectId
+        ? state.projects.find((project) => project.id === projectId)
+        : null,
+    })),
+
   addProject: (project: TProject) =>
     set((state) => ({ projects: [...state.projects, project] })),
 
-  editProject: (projectId: string, newData: Partial<TProject>) =>
-    set((state) => ({
-      projects: state.projects.map((project) =>
+  // editProject: (projectId: string, newData: Partial<TProject>) => {
+  //   set((state) => ({
+  //     projects: state.projects.map((project) =>
+  //       project.id === projectId ? { ...project, ...newData } : project
+  //     ),
+  //   }));
+  // },
+  editProject: (projectId: string, newData: Partial<TProject>) => {
+    set((state) => {
+      // Update the projects array
+      const updatedProjects = state.projects.map((project) =>
         project.id === projectId ? { ...project, ...newData } : project
-      ),
-    })),
+      );
 
+      // Call setSingleProject to update the singleProject state
+      const updatedProject = updatedProjects.find(
+        (project) => project.id === projectId
+      );
+      const newState = {
+        ...state,
+        projects: updatedProjects,
+        singleProject: updatedProject, // Update singleProject with the edited project
+      };
+
+      return newState;
+    });
+  },
   deleteProject: (projectId: string) =>
     set((state) => ({
       projects: state.projects.filter(
@@ -63,7 +92,6 @@ export const useProjects = () => {
 
 export const useProjectById = (projectId: string) => {
   const projects = useProjectStore((state) => state.projects);
-
   const project = projects.find((project) => project.id === projectId);
   return project;
 };

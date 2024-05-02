@@ -1,4 +1,5 @@
 import { TProject } from "@/type";
+import useProjectStore from "@/zustand/projectStore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -10,9 +11,11 @@ const ProjectCard = ({
   status,
   deadline,
 }: TProject) => {
+  const setSingleProject = useProjectStore((state) => state.setSingleProject);
   const router = useRouter();
 
   const handleDetails = (id: string) => {
+    setSingleProject(id);
     router.push(`/projects/${id}`);
   };
 

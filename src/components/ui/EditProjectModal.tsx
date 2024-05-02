@@ -1,20 +1,57 @@
 import React from "react";
 import { Modal, Form, Input, DatePicker, Button, Select } from "antd";
 import { TaskFormData, TaskFormProps } from "@/type";
-import { useProjectById } from "@/zustand/projectStore";
+import { Option } from "antd/es/mentions";
+import moment from "moment";
+import useProjectStore from "@/zustand/projectStore";
 
 const EditProjectModal: React.FC<TaskFormProps> = ({
+  initialData,
   projectId,
   visible,
   onCreate,
   onCancel,
 }) => {
   const [form] = Form.useForm<TaskFormData>();
+  const editProjectFunc = useProjectStore((state) => state.editProject);
+  const initialValues = {
+    name: initialData?.name,
+    description: initialData?.description,
+    deadline: moment(initialData?.deadline),
+    status: initialData?.status,
+    image: initialData?.image,
+  };
 
   const onFinish = (values: TaskFormData) => {
+    const deadlineString = new Date(values.deadline);
+    const editedProject = {
+      id: projectId,
+      name: values.name,
+      description: values.description,
+      deadline: deadlineString.toISOString(),
+      status: values.status,
+      image: values.image,
+    };
+
+    editProjectFunc(projectId as string, editedProject);
     onCreate(values);
     form.resetFields();
   };
+
+  // const onFinish = (values: TaskFormData) => {
+  //   const deadlineString = new Date(values.deadline);
+  //   const editedProject = {
+  //     id: projectId,
+  //     name: values.name,
+  //     description: values.description,
+  //     deadline: deadlineString.toISOString(),
+  //     status: values.status,
+  //     image: values.image,
+  //   };
+  //   onCreate(values);
+  //   editProjectFunc(projectId as string, editedProject);
+  //   form.resetFields();
+  // };
 
   return (
     <Modal
@@ -28,8 +65,14 @@ const EditProjectModal: React.FC<TaskFormProps> = ({
         Edit <span className="text-blue-500"> Project</span>
       </h2>
 
-      <Form form={form} layout="vertical" onFinish={onFinish}>
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={onFinish}
+        initialValues={initialValues}
+      >
         <Form.Item
+          initialValue={initialData?.name}
           name="name"
           label="Project name"
           rules={[{ required: true, message: "Please enter the project name" }]}
@@ -52,10 +95,14 @@ const EditProjectModal: React.FC<TaskFormProps> = ({
         </Form.Item>
         <Form.Item
           name="status"
-          label="Status"
+          label="Select"
           rules={[{ required: true, message: "Please select the status" }]}
         >
-          <Select />
+          <Select>
+            <Option value="Pending">Pending</Option>
+            <Option value="In-Progress">In-Progress</Option>
+            <Option value="Completed">Completed</Option>
+          </Select>
         </Form.Item>
         <Form.Item
           name="image"

@@ -22,13 +22,16 @@ export type TProject = {
   image: string;
   tasks: TTask[];
 };
-
 export interface State {
   login: boolean;
   projects: TProject[];
   setProjects: (projects: TProject[]) => void;
-  deleteProject: (projectId: string) => void;
-  addTask: (projectId: string, task: TTask) => void;
+  singleProject: TProject | null;
+  setSingleProject: (id: string) => void;
+  addProject: (project: TProject) => void;
+  editProject: (projectId: string, newData: Partial<TProject>) => void;
+  deleteProject: (id: string) => void;
+  addTask: (id: string, task: TTask) => void;
 }
 
 export interface TaskFormProps {
@@ -40,10 +43,13 @@ export interface TaskFormProps {
 }
 
 export interface TaskFormData {
-  title: string;
+  id: string;
+  name: string;
+  title?: string;
   description: string;
   deadline: string;
-  assignedTo: string;
+  status: string;
+  image: string;
 }
 
 export type TParams = {

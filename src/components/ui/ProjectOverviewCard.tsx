@@ -2,6 +2,7 @@ import { TProject } from "@/type";
 import useProjectStore from "@/zustand/projectStore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import EditProjectModal from "./EditProjectModal";
 
 const ProjectOverviewCard = ({
   id,
@@ -11,13 +12,14 @@ const ProjectOverviewCard = ({
   status,
   deadline,
 }: TProject) => {
+  const setSingleProject = useProjectStore((state) => state.setSingleProject);
   const router = useRouter();
 
   const handleDeleteProject = (id: string) => {
     useProjectStore.getState().deleteProject(id);
   };
-
   const handleDetails = (id: string) => {
+    setSingleProject(id);
     router.push(`/projects/${id}`);
   };
 
@@ -70,10 +72,19 @@ const ProjectOverviewCard = ({
             >
               Details
             </button>
-            <button className="px-4 py-2 border border-yellow-600 rounded-md hover:bg-yellow-500 hover:text-white">
+            <button
+              className="px-5 py-2 border border-yellow-600 rounded-md hover:bg-yellow-500 hover:text-white"
+              // onClick={() => setIsEditModalVisible(true)}
+            >
               Edit
             </button>
-
+            {/* <EditProjectModal
+              initialData={project}
+              projectId={params.projectId}
+              visible={isEditModalVisible}
+              onCreate={handleEditProject}
+              onCancel={handleCancelEdit}
+            /> */}
             <button
               className="px-4 py-2 border border-red-600 rounded-md hover:bg-red-500 hover:text-white"
               onClick={() => handleDeleteProject(id)}
